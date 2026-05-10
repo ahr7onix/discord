@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JESTER — Sobre</title>
+
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --gold:#c9a84c;
+    --gold-light:#f0d080;
+    --gold-dim:#7a6020;
+
+    --red:#cc2222;
+    --red-glow:#ff3333;
+
+    --white:#e8e0d0;
+    --off-white:#b0a898;
+
+    --card-bg:rgba(10,10,10,.72);
+    --card-border:rgba(201,168,76,.3);
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+
+    background:#000;
+    color:var(--white);
+
+    cursor:crosshair;
+
+    transition:opacity .8s ease-in-out;
+}
+
+/* VIDEO */
+#bg-video{
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    min-width:100%;
+    min-height:100%;
+
+    width:auto;
+    height:auto;
+
+    transform:translate(-50%, -50%);
+
+    object-fit:cover;
+
+    z-index:0;
+
+    background:#000;
+
+    filter:
+        brightness(.55)
+        contrast(1.15)
+        saturate(1.05);
+
+    pointer-events:none;
+}
+
+/* OVERLAYS */
+.ov-vignette{
+    position:fixed;
+    inset:0;
+
+    z-index:1;
+
+    background:
+    radial-gradient(
+        ellipse at center,
+        transparent 60%,
+        rgba(0,0,0,.45) 100%
+    );
+
+    pointer-events:none;
+}
+
+.ov-scanlines{
+    position:fixed;
+    inset:0;
+
+    z-index:2;
+
+    opacity:.15;
+
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0,0,0,.08) 3px,
+        rgba(0,0,0,.08) 4px
+    );
+
+    pointer-events:none;
+}
+
+.ov-bottom{
+    position:fixed;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:15vh;
+
+    z-index:2;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.6) 0%,
+        transparent 100%
+    );
+
+    pointer-events:none;
+}
+
+/* BOTAO VOLTAR */
+.back{
+    position:fixed;
+
+    top:2rem;
+    left:2rem;
+
+    z-index:50;
+
+    text-decoration:none;
+
+    font-family:'Cinzel', serif;
+    font-size:.65rem;
+
+    letter-spacing:.25em;
+    text-transform:uppercase;
+
+    color:var(--gold-dim);
+
+    transition:.3s;
+}
+
+.back:hover{
+    color:var(--gold-light);
+}
+
+.back::before{
+    content:'← ';
+}
+
+/* MAIN */
+main{
+    position:relative;
+
+    z-index:10;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:6rem 2rem;
+}
+
+/* CARD */
+.card{
+    position:relative;
+
+    width:100%;
+    max-width:720px;
+
+    padding:3.5rem 2.8rem;
+
+    border:1px solid var(--card-border);
+
+    background:var(--card-bg);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 25px 50px -12px rgba(0,0,0,.6),
+        inset 0 0 0 1px rgba(201,168,76,.1);
+
+    animation:
+        cardAppear 1s .3s cubic-bezier(.16,1,.3,1) forwards;
+
+    opacity:0;
+}
+
+.card::before{
+    content:'';
+
+    position:absolute;
+    inset:-1px;
+
+    border:1px solid rgba(201,168,76,.15);
+
+    pointer-events:none;
+}
+
+.card-corner{
+    position:absolute;
+
+    width:18px;
+    height:18px;
+
+    border-style:solid;
+    border-color:var(--gold);
+
+    opacity:.6;
+}
+
+.card-corner.tl{
+    top:6px;
+    left:6px;
+    border-width:1px 0 0 1px;
+}
+
+.card-corner.tr{
+    top:6px;
+    right:6px;
+    border-width:1px 1px 0 0;
+}
+
+.card-corner.bl{
+    bottom:6px;
+    left:6px;
+    border-width:0 0 1px 1px;
+}
+
+.card-corner.br{
+    bottom:6px;
+    right:6px;
+    border-width:0 1px 1px 0;
+}
+
+/* HEADER */
+.card-header{
+    text-align:center;
+    margin-bottom:2.8rem;
+}
+
+.card-rune{
+    font-family:'UnifrakturMaguntia', cursive;
+
+    font-size:.7rem;
+
+    color:var(--gold-dim);
+
+    letter-spacing:.5em;
+    text-transform:uppercase;
+
+    margin-bottom:1.2rem;
+}
+
+.card-title{
+    font-family:'Cinzel Decorative', serif;
+    font-weight:700;
+
+    font-size:clamp(1.8rem,4vw,2.6rem);
+
+    line-height:1.1;
+
+    margin-bottom:.6rem;
+}
+
+.card-title span{
+    color:var(--gold);
+}
+
+.card-subtitle{
+    font-family:'IM Fell English', serif;
+    font-style:italic;
+
+    font-size:1rem;
+
+    color:var(--off-white);
+}
+
+/* DIVIDER */
+.card-divider{
+    position:relative;
+
+    width:100%;
+    height:1px;
+
+    margin:2rem 0 2.2rem;
+
+    background:
+    linear-gradient(
+        to right,
+        transparent,
+        var(--gold-dim),
+        transparent
+    );
+}
+
+.card-divider::before{
+    content:'✦';
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%, -50%);
+
+    background:#0a0a0a;
+
+    color:var(--gold);
+
+    font-size:.7rem;
+
+    padding:0 10px;
+}
+
+/* TEXTO */
+.card-about{
+    text-align:center;
+
+    font-family:'IM Fell English', serif;
+
+    font-size:1.08rem;
+
+    line-height:1.85;
+
+    color:var(--off-white);
+
+    margin-bottom:2.8rem;
+}
+
+/* REDES */
+.platforms-label{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+
+    margin-bottom:1.6rem;
+
+    text-align:center;
+
+    font-family:'Cinzel', serif;
+
+    font-size:.6rem;
+
+    letter-spacing:.4em;
+    text-transform:uppercase;
+
+    color:var(--gold-dim);
+}
+
+.platforms-label::before,
+.platforms-label::after{
+    content:'';
+
+    flex:1;
+    height:1px;
+
+    background:
+    linear-gradient(
+        to right,
+        transparent,
+        var(--gold-dim)
+    );
+}
+
+.platforms-label::after{
+    background:
+    linear-gradient(
+        to left,
+        transparent,
+        var(--gold-dim)
+    );
+}
+
+.platform-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit, minmax(140px, 1fr));
+
+    gap:1rem;
+}
+
+.platform-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.7rem;
+
+    text-decoration:none;
+
+    padding:1.4rem 1rem;
+
+    background:rgba(201,168,76,.04);
+
+    border:1px solid rgba(201,168,76,.2);
+
+    color:var(--white);
+
+    transition:.35s ease;
+}
+
+.platform-card:hover{
+    transform:translateY(-3px);
+
+    background:rgba(201,168,76,.1);
+
+    border-color:var(--gold);
+
+    box-shadow:
+        0 0 24px rgba(201,168,76,.15);
+}
+
+.platform-icon{
+    width:28px;
+    height:28px;
+}
+
+.platform-icon img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.platform-name{
+    font-family:'Cinzel', serif;
+
+    font-size:.7rem;
+    font-weight:600;
+
+    letter-spacing:.15em;
+    text-transform:uppercase;
+
+    color:var(--gold-light);
+}
+
+.platform-user{
+    font-family:'IM Fell English', serif;
+
+    font-size:.75rem;
+
+    color:var(--off-white);
+
+    font-style:italic;
+}
+
+/* FOOTER */
+.card-footer{
+    margin-top:2.8rem;
+
+    text-align:center;
+
+    font-family:'Cinzel', serif;
+
+    font-size:.58rem;
+
+    letter-spacing:.25em;
+    text-transform:uppercase;
+
+    color:var(--gold-dim);
+}
+
+/* AUDIO SCREEN */
+#audio-unlock{
+    position:fixed;
+    inset:0;
+
+    z-index:9999;
+
+    background:#000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:opacity 1s ease;
+}
+
+#audio-unlock button{
+    border:2px solid var(--gold);
+
+    background:none;
+
+    color:var(--gold);
+
+    padding:2rem 6rem;
+
+    font-family:'Cinzel', serif;
+    font-size:2rem;
+
+    letter-spacing:1em;
+
+    cursor:pointer;
+
+    transition:.4s;
+}
+
+#audio-unlock button:hover{
+    background:var(--gold);
+    color:#000;
+
+    box-shadow:
+        0 0 20px rgba(201,168,76,.4);
+}
+
+.hidden{
+    opacity:0;
+    pointer-events:none;
+}
+
+/* ANIMACOES */
+@keyframes cardAppear{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+        filter:blur(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+        filter:blur(0);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TELA AUDIO -->
+<div id="audio-unlock">
+    <button onclick="unlockAudio()">
+        REVELAR
+    </button>
+</div>
+
+<!-- VIDEO -->
+<video
+    id="bg-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto">
+
+    <!-- VIDEO NA MESMA PASTA -->
+    <source
+        src="Undertale OST - Asgore (Slow Piano Version).mp4"
+        type="video/mp4">
+
+</video>
+
+<div class="ov-vignette"></div>
+<div class="ov-scanlines"></div>
+<div class="ov-bottom"></div>
+
+<a href="index.html" class="back" id="back-link">
+    Voltar
+</a>
+
+<main>
+
+<div class="card">
+
+<div class="card-corner tl"></div>
+<div class="card-corner tr"></div>
+<div class="card-corner bl"></div>
+<div class="card-corner br"></div>
+
+<div class="card-header">
+
+<p class="card-rune">
+✦ &nbsp; Quem sou eu &nbsp; ✦
+</p>
+
+<h1 class="card-title">
+Jester <span>
+</h1>
+
+<p class="card-subtitle">
+A sede entre o bem e o mal na noite da escuridão absoluta
+</p>
+
+</div>
+
+<div class="card-divider"></div>
+
+<p class="card-about">
+Meu nome é Isac, tenho 20 anos e atuo como desenvolvedor de sistemas há mais de um ano. Durante essa jornada, venho criando projetos próprios e soluções para clientes, sempre buscando transformar ideias em algo funcional, moderno e marcante.
+<br><br>
+Sou fundador da <strong>NX Web Designer</strong>, uma empresa voltada ao desenvolvimento de sistemas, experiências digitais e projetos tecnológicos. Atualmente, estou iniciando novos projetos focados em aplicativos de segurança e ferramentas que possam unir praticidade, inovação e proteção em um único ambiente.
+<br><br>
+A tecnologia sempre foi mais do que apenas trabalho para mim — ela representa evolução, conhecimento e liberdade criativa. Meu objetivo é aprofundar cada vez mais meu domínio sobre desenvolvimento, ciência tecnológica e novas áreas do avanço digital, buscando constantemente ir além do que já conheço hoje.
+<br><br>
+E independentemente das dificuldades, críticas ou obstáculos, eu nunca pretendo parar. Não importa o caminho, a pressão ou quantas pessoas tentem diminuir minha capacidade — cada desafio apenas fortalece minha determinação. Sempre vou continuar avançando, aprendendo, evoluindo e ultrapassando qualquer limite colocado diante de mim.
+<br><br>
+Porque no final, aqueles que persistem mesmo quando tudo parece impossível são os que realmente deixam sua marca no mundo.
+
+<span style="display:block;margin-top:1.8rem;color:var(--gold-light);font-style:italic;">
+✦ “O futuro pertence àqueles que constroem enquanto os outros apenas observam.” ✦
+</span>
+</p>
+
+<div class="platforms-section">
+
+<p class="platforms-label">
+Plataformas & Redes
+</p>
+
+<div class="platform-grid">
+
+<a href="https://github.com/ahr7onix"
+target="_blank"
+class="platform-card">
+
+<span class="platform-icon">
+<img src="https://cdn.simpleicons.org/github/c9a84c">
+</span>
+
+<span class="platform-name">
+GitHub
+</span>
+
+<span class="platform-user">
+ahr7onix
+</span>
+
+</a>
+
+<a href="https://www.youtube.com/@ahr7464"
+target="_blank"
+class="platform-card">
+
+<span class="platform-icon">
+<img src="https://cdn.simpleicons.org/youtube/c9a84c">
+</span>
+
+<span class="platform-name">
+YouTube
+</span>
+
+<span class="platform-user">
+@ahr7464
+</span>
+
+</a>
+
+<a href="https://www.instagram.com/isacbuzelli_/"
+target="_blank"
+class="platform-card">
+
+<span class="platform-icon">
+<img src="https://cdn.simpleicons.org/instagram/c9a84c">
+</span>
+
+<span class="platform-name">
+Instagram
+</span>
+
+<span class="platform-user">
+@isacbuzelli_
+</span>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="card-footer">
+✦ &nbsp; JESTER &nbsp; ✦
+</div>
+
+</div>
+
+</main>
+
+<script>
+
+/* LIBERAR AUDIO */
+function unlockAudio(){
+
+    const video =
+    document.getElementById('bg-video');
+
+    video.muted = false;
+
+    video.volume = 0.6;
+
+    video.play().catch(err=>{
+        console.log(err);
+    });
+
+    document
+        .getElementById('audio-unlock')
+        .classList
+        .add('hidden');
+}
+
+/* TRANSICAO */
+document
+.getElementById('back-link')
+.addEventListener('click', function(e){
+
+    e.preventDefault();
+
+    const target = this.href;
+
+    document.body.style.opacity = '0';
+
+    setTimeout(()=>{
+        window.location.href = target;
+    }, 800);
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JESTER</title>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a84c; --gold-light: #f0d080; --gold-dim: #7a6020;
+    --red: #cc2222; --red-glow: #ff3333;
+    --white: #e8e0d0; --off-white: #b0a898;
+  }
+  html, body { width: 100%; height: 100%; background: #000; color: var(--white); overflow: hidden; cursor: crosshair; }
+
+  .overlay-vignette { position: fixed; inset: 0; z-index: 1; background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%); pointer-events: none; }
+  .overlay-scanlines { position: fixed; inset: 0; z-index: 2; background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px); pointer-events: none; opacity: 0.15; }
+
+  main { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+
+  .rune-top { font-family: 'UnifrakturMaguntia', cursive; font-size: clamp(0.65rem, 1.4vw, 0.9rem); color: var(--gold-dim); letter-spacing: 0.6em; text-transform: uppercase; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 1s 0.5s ease forwards; }
+
+  .hero-name { font-family: 'Cinzel Decorative', serif; font-weight: 900; font-size: clamp(4.5rem, 14vw, 11rem); line-height: 0.9; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 1px var(--gold); text-shadow: 0 0 60px rgba(201,168,76,0.25), 0 0 120px rgba(201,168,76,0.1); position: relative; opacity: 0; animation: blazeIn 1.4s 0.9s cubic-bezier(0.16,1,0.3,1) forwards; user-select: none; }
+  .hero-name::after { content: attr(data-text); position: absolute; inset: 0; color: var(--gold); -webkit-text-stroke: 0; clip-path: polygon(0 55%, 100% 45%, 100% 100%, 0 100%); opacity: 0.35; }
+
+  .divider { width: 220px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 2rem auto; position: relative; opacity: 0; animation: fadeIn 1s 1.8s ease forwards; }
+  .divider::before { content: '✦'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: var(--gold); font-size: 0.8rem; background: #000; padding: 0 8px; }
+
+  .hero-subtitle { font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(0.95rem, 2.2vw, 1.25rem); color: var(--off-white); letter-spacing: 0.04em; max-width: 500px; line-height: 1.7; opacity: 0; animation: fadeUp 1s 2s ease forwards; }
+
+  .hero-cta { margin-top: 3rem; opacity: 0; animation: fadeUp 1s 2.3s ease forwards; }
+
+  .btn { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; text-decoration: none; padding: 1.2rem 3.5rem; border: 1px solid var(--gold); color: var(--gold-light); background: rgba(201,168,76,0.08); cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; display: inline-block; }
+  .btn::before { content: ''; position: absolute; inset: 0; background: rgba(201,168,76,0.1); transform: translateX(-101%); transition: transform 0.3s ease; }
+  .btn:hover::before { transform: translateX(0); }
+  .btn:hover { border-color: var(--gold-light); box-shadow: 0 0 24px rgba(201,168,76,0.25); color: #fff; }
+
+  .soul { display: block; width: 13px; height: 13px; background: var(--red); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); margin: 2.2rem auto 0; opacity: 0; animation: fadeIn 0.5s 2.8s ease forwards, soulPulse 2s 3.3s ease-in-out infinite; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes blazeIn { 0% { opacity: 0; transform: scale(1.08); filter: blur(12px); } 60% { opacity: 1; filter: blur(0); } 100% { opacity: 1; transform: scale(1); filter: blur(0); } }
+  @keyframes soulPulse { 0%, 100% { box-shadow: 0 0 10px var(--red-glow); transform: scale(1); } 50% { box-shadow: 0 0 28px var(--red-glow), 0 0 50px rgba(255,50,50,0.3); transform: scale(1.18); } }
+</style>
+</head>
+<body>
+<div class="overlay-vignette"></div>
+<div class="overlay-scanlines"></div>
+<main>
+  <p class="rune-top">✦ &nbsp; Est. In the Underground &nbsp; ✦</p>
+  <h1 class="hero-name" data-text="JESTER">JESTER</h1>
+  <div class="divider"></div>
+  <p class="hero-subtitle">
+    Entre máscaras e sombras, existe alguém que escolheu rir<br>
+    onde outros choraram — e criar onde outros desistiram.
+  </p>
+  <div class="hero-cta">
+    <a href="sobre.html" class="btn">Sobre mim</a>
+  </div>
+  <div class="soul"></div>
+</main>
+<script>
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:999;pointer-events:none;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+  const particles = []; let mx = -100, my = -100;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function drawDiamond(cx, cy, size, alpha) {
+    ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = `hsl(0,90%,${40+alpha*30}%)`; ctx.shadowColor = '#ff2222'; ctx.shadowBlur = 10*alpha;
+    ctx.beginPath(); ctx.moveTo(cx,cy-size); ctx.lineTo(cx+size,cy); ctx.lineTo(cx,cy+size); ctx.lineTo(cx-size,cy); ctx.closePath(); ctx.fill(); ctx.restore();
+  }
+  function loop() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if (mx > 0) particles.push({ x:mx, y:my, life:1, size:4+Math.random()*3, vx:(Math.random()-0.5)*1.5, vy:(Math.random()-0.5)*1.5 });
+    for (let i = particles.length-1; i >= 0; i--) {
+      const p = particles[i]; p.life -= 0.045; p.x += p.vx; p.y += p.vy; p.size *= 0.97;
+      if (p.life <= 0) { particles.splice(i,1); continue; }
+      drawDiamond(p.x, p.y, p.size, p.life*0.7);
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+</script>
+</body>
+</html>
