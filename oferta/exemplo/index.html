@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Luna</title>
+<meta name="description" content="Exemplo de página para um estúdio de estética.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f6f1ea">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%237a3e32' width='32' height='32'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #241c18;
+    --muted: #5e534c;
+    --line: #e6dcd1;
+    --paper: #f6f1ea;
+    --card: #fffdfb;
+    --accent: #7a3e32;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Outfit, system-ui, sans-serif;
+    line-height: 1.5;
+    opacity: 0;
+  }
+  body.pronta { opacity: 1; }
+  a { color: inherit; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .wrap { width: min(1040px, calc(100% - 2rem)); margin: 0 auto; }
+  .faixa {
+    background: #3f2c24;
+    color: #f6efe6;
+    text-align: center;
+    padding: .65rem 1rem;
+    font-size: .92rem;
+  }
+  .faixa a { color: #f3d7a1; }
+  header.barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+  .logo {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 1.35rem;
+    text-decoration: none;
+  }
+  .agenda {
+    background: var(--accent);
+    color: #fffaf6;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: .65rem 1rem;
+    font-weight: 600;
+  }
+  .agenda:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .hero {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 2rem;
+    align-items: center;
+    padding-bottom: 2.5rem;
+  }
+  .olho {
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-size: .78rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 .6rem;
+  }
+  h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.7rem, 6vw, 4.8rem);
+    line-height: .95;
+    letter-spacing: -.03em;
+    margin: 0 0 .8rem;
+  }
+  .slogan { font-size: 1.15rem; color: var(--muted); margin: 0 0 1.2rem; max-width: 34rem; }
+  .botoes { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .sec {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    border-radius: 999px;
+    padding: .65rem 1rem;
+    font-weight: 600;
+  }
+  .hero figure {
+    margin: 0;
+    border-radius: 22px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: #ddd4c8;
+  }
+  section { padding: 1rem 0 2.6rem; }
+  h2 {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    margin: 0 0 1rem;
+    letter-spacing: -.02em;
+  }
+  .servicos { list-style: none; margin: 0; padding: 0; }
+  .servicos li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .3rem 1rem;
+    padding: .9rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .servicos li:last-child { border-bottom: 1px solid var(--line); }
+  .servicos strong { font-weight: 600; }
+  .servicos span { color: var(--muted); grid-column: 1; }
+  .servicos b { font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: 1.15rem; }
+  .sobre {
+    display: grid;
+    grid-template-columns: .7fr 1.3fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .sobre p { margin: 0; font-size: 1.08rem; color: var(--muted); }
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .6rem;
+  }
+  .galeria figure {
+    margin: 0;
+    aspect-ratio: 1;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #e7ddd2;
+  }
+  .quotes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .8rem; }
+  blockquote {
+    margin: 0;
+    background: var(--card);
+    border-radius: 16px;
+    padding: 1rem;
+    border: 1px solid var(--line);
+  }
+  blockquote p { margin: 0 0 .7rem; font-family: Fraunces, Georgia, serif; font-size: 1.12rem; }
+  blockquote footer { color: var(--muted); font-size: .9rem; }
+  .nota { color: var(--muted); font-size: .85rem; }
+  .onde {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 1rem;
+    background: #241c18;
+    color: #f6f1ea;
+    border-radius: 20px;
+    padding: 1.3rem;
+  }
+  .onde p { margin: .2rem 0; }
+  .onde a.agenda { display: inline-flex; margin-top: .8rem; }
+  footer.fim {
+    padding: 1rem 0 6rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: .9rem;
+  }
+  .dock {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .7rem;
+    padding: .7rem 1rem calc(.7rem + env(safe-area-inset-bottom));
+    background: rgba(255, 253, 251, .95);
+    border-top: 1px solid var(--line);
+  }
+  .dock strong { font-family: Fraunces, Georgia, serif; font-size: 1.2rem; font-weight: 500; }
+  @media (max-width: 800px) {
+    .hero, .sobre, .quotes, .onde { grid-template-columns: 1fr; }
+    .galeria { grid-template-columns: 1fr 1fr; }
+    header.barra .agenda { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body.pronta { transition: none; }
+  }
+</style>
+</head>
+<body>
+<script>
+/* EDITE SÓ ESTE BLOCO.
+   Duplique a pasta exemplo, troque os dados, publique a pasta.
+   exemplo: true  -> tarja de demonstração e depoimentos marcados como ilustração.
+   exemplo: false -> site de cliente. Só use depoimento real. */
+const NEGOCIO = {
+  exemplo: true,
+  nome: "Studio Luna",
+  slogan: "Sobrancelha, pele e cabelo, com hora marcada.",
+  cidade: "Centro",
+  tipo: "Estética",
+  whatsapp: "",
+  mensagem: "Oi, vi a página do Studio Luna e quero agendar.",
+  endereco: "Rua das Acácias, 120 — Centro",
+  maps: "https://www.google.com/maps/search/?api=1&query=Rua+das+Acacias+120",
+  horario: ["Terça a sexta, 9h–19h", "Sábado, 9h–14h", "Domingo e segunda, fechado"],
+  sobre: "Atendimento com hora marcada, num endereço só. Você chega, faz o serviço e volta para o dia. Sem pacote escondido e sem sala lotada.",
+  servicos: [
+    ["Design de sobrancelha", "Medição e pinça. Henna se você quiser.", "R$ 45"],
+    ["Limpeza de pele", "Avaliação rápida e o protocolo do seu tipo de pele.", "R$ 140"],
+    ["Corte", "Corte seco, alinhado com o que você já usa no dia a dia.", "R$ 90"],
+    ["Escova", "Modelagem para sair pronta, sem promessa de milagre.", "R$ 70"],
+    ["Manicure", "Cutilagem e esmaltação.", "R$ 40"],
+    ["Hidratação", "Um tratamento, no mesmo horário do corte se couber.", "R$ 80"]
+  ],
+  fotos: [
+    "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=70",
+    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=70",
+    "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=70",
+    "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=900&q=70",
+    "https://images.unsplash.com/photo-1519415387722-a1c3bbef716c?auto=format&fit=crop&w=900&q=70",
+    "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=70"
+  ],
+  depoimentos: [
+    ["Marquei pelo WhatsApp e fui atendida no horário. Era isso que eu queria.", "Camila"],
+    ["A limpeza de pele foi explicada antes de começar. Sem empurrar pacote.", "Renata"],
+    ["Levei minha mãe no sábado. Cabem as duas sem pressa.", "Lívia"]
+  ]
+};
+</script>
+<div id="app"></div>
+<script>
+(function () {
+  const n = NEGOCIO;
+  const fone = String(n.whatsapp || "").replace(/\D/g, "");
+  const wa = fone.length >= 12
+    ? "https://wa.me/" + fone + "?text=" + encodeURIComponent(n.mensagem || ("Oi, vi a página do " + n.nome))
+    : "";
+  const maps = n.maps || ("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(n.endereco || n.nome));
+
+  function h(tag, attrs, kids) {
+    const el = document.createElement(tag);
+    Object.entries(attrs || {}).forEach(([k, v]) => {
+      if (v == null || v === false) return;
+      if (k === "class") el.className = v;
+      else el.setAttribute(k, v);
+    });
+    [].concat(kids || []).forEach((kid) => {
+      if (kid == null || kid === false) return;
+      el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+    });
+    return el;
+  }
+
+  document.title = n.nome + " — " + (n.tipo || "página");
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc) desc.setAttribute("content", n.slogan || n.nome);
+
+  const app = document.getElementById("app");
+  const waBtn = (rotulo, classe) => wa
+    ? h("a", { class: classe || "agenda", href: wa, target: "_blank", rel: "noopener noreferrer" }, rotulo)
+    : h("a", { class: classe || "agenda", href: "#aviso" }, rotulo);
+
+  const heroImg = h("img", {
+    src: n.fotos[0],
+    alt: "Foto de " + n.nome,
+    fetchpriority: "high"
+  });
+  heroImg.addEventListener("error", () => { heroImg.remove(); });
+
+  const lista = h("ul", { class: "servicos" }, n.servicos.map(([nome, detalhe, preco]) => h("li", {}, [
+    h("strong", {}, nome),
+    h("b", {}, preco),
+    detalhe ? h("span", {}, detalhe) : null
+  ])));
+
+  const fotos = h("div", { class: "galeria" }, n.fotos.slice(1).map((src, i) => {
+    const img = h("img", { src, alt: "Foto " + (i + 2) + " de " + n.nome, loading: "lazy" });
+    const fig = h("figure", {}, img);
+    img.addEventListener("error", () => fig.remove());
+    return fig;
+  }));
+
+  const quotes = (n.depoimentos || []).length
+    ? h("section", {}, [
+        h("div", { class: "wrap" }, [
+          h("h2", {}, "Quem já foi"),
+          n.exemplo ? h("p", { class: "nota" }, "Depoimentos ilustrativos, só neste exemplo. No cliente, use frase real ou apague a lista.") : null,
+          h("div", { class: "quotes" }, n.depoimentos.map(([texto, nome]) => h("blockquote", {}, [
+            h("p", {}, "“" + texto + "”"),
+            h("footer", {}, nome)
+          ])))
+        ])
+      ])
+    : null;
+
+  app.append(
+    n.exemplo ? h("div", { class: "faixa", id: "aviso" }, [
+      "Exemplo de portfólio da NX. Dados e depoimentos são fictícios. ",
+      h("a", { href: "../index.html" }, "Voltar para a oferta")
+    ]) : h("div", { id: "aviso" }),
+    h("div", { class: "wrap" }, [
+      h("header", { class: "barra" }, [
+        h("a", { class: "logo", href: "#topo" }, n.nome),
+        waBtn("Agendar")
+      ]),
+      h("section", { class: "hero", id: "topo" }, [
+        h("div", {}, [
+          h("p", { class: "olho" }, [n.tipo, n.cidade].filter(Boolean).join(" · ")),
+          h("h1", {}, n.nome),
+          h("p", { class: "slogan" }, n.slogan),
+          h("div", { class: "botoes" }, [
+            waBtn(wa ? "Chamar no WhatsApp" : "WhatsApp do negócio"),
+            h("a", { class: "sec", href: "#servicos" }, "Ver serviços")
+          ])
+        ]),
+        h("figure", {}, heroImg)
+      ])
+    ]),
+    h("section", { id: "servicos" }, h("div", { class: "wrap" }, [h("h2", {}, "Serviços"), lista])),
+    h("section", {}, h("div", { class: "wrap sobre" }, [
+      h("h2", {}, "A casa"),
+      h("p", {}, n.sobre)
+    ])),
+    h("section", {}, h("div", { class: "wrap" }, [h("h2", {}, "Por dentro"), fotos])),
+    h("section", {}, h("div", { class: "wrap" }, h("div", { class: "onde" }, [
+      h("div", {}, [
+        h("h2", {}, "Onde e quando"),
+        h("p", {}, n.endereco),
+        ...(n.horario || []).map((linha) => h("p", {}, linha))
+      ]),
+      h("div", {}, [
+        h("a", { class: "sec", href: maps, target: "_blank", rel: "noopener noreferrer", style: "display:inline-flex;background:transparent;color:#f6f1ea;border-color:#8a7568" }, "Como chegar"),
+        waBtn("Agendar horário")
+      ])
+    ]))),
+    h("div", { class: "wrap" }, h("footer", { class: "fim" }, [
+      n.nome + (n.cidade ? " · " + n.cidade : ""),
+      n.exemplo ? "Página de exemplo · NX Web Designer" : "Feito por NX Web Designer"
+    ])),
+    h("div", { class: "dock" }, [
+      h("strong", {}, n.nome),
+      waBtn(wa ? "WhatsApp" : "Agendar")
+    ])
+  );
+  const onde = app.querySelector(".onde");
+  if (quotes && onde) onde.parentElement.parentElement.before(quotes);
+
+  if (!n.exemplo && fone.length >= 12) {
+    const dados = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: n.nome,
+      description: n.slogan,
+      telephone: "+" + fone,
+      address: n.endereco,
+      url: location.href
+    };
+    const script = h("script", { type: "application/ld+json" }, JSON.stringify(dados));
+    document.head.append(script);
+  }
+
+  document.body.classList.add("pronta");
+})();
+</script>
+<noscript>Esta página precisa de JavaScript para montar o conteúdo a partir do bloco NEGOCIO.</noscript>
+</body>
+</html>

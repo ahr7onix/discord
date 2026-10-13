@@ -29,7 +29,9 @@
 
   .hero-subtitle { font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(0.95rem, 2.2vw, 1.25rem); color: var(--off-white); letter-spacing: 0.04em; max-width: 500px; line-height: 1.7; opacity: 0; animation: fadeUp 1s 2s ease forwards; }
 
-  .hero-cta { margin-top: 3rem; opacity: 0; animation: fadeUp 1s 2.3s ease forwards; }
+  .hero-cta { margin-top: 3rem; opacity: 0; animation: fadeUp 1s 2.3s ease forwards; display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
+  .work-link { font-family: 'Cinzel', serif; font-size: .62rem; letter-spacing: .28em; text-transform: uppercase; text-decoration: none; color: var(--gold-dim); }
+  .work-link:hover { color: var(--gold-light); }
 
   .btn { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; text-decoration: none; padding: 1.2rem 3.5rem; border: 1px solid var(--gold); color: var(--gold-light); background: rgba(201,168,76,0.08); cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; display: inline-block; }
   .btn::before { content: ''; position: absolute; inset: 0; background: rgba(201,168,76,0.1); transform: translateX(-101%); transition: transform 0.3s ease; }
@@ -57,6 +59,7 @@
   </p>
   <div class="hero-cta">
     <a href="sobre.html" class="btn">Sobre mim</a>
+    <a href="oferta/index.html" class="work-link">Sites para negócios</a>
   </div>
   <div class="soul"></div>
 </main>

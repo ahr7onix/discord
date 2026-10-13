@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Começa hoje — kit de freela da NX</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%231c1915' width='32' height='32'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1c1915; --muted:#5c564c; --line:#e4dacd; --paper:#f7f3ec; --card:#fffdf9; --green:#0d5c45; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: Outfit, system-ui, sans-serif; line-height: 1.55; }
+  .wrap { width: min(760px, calc(100% - 1.5rem)); margin: 0 auto; padding: 1.5rem 0 4rem; }
+  h1 { font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1; letter-spacing: -.03em; margin: 0 0 .6rem; }
+  h2 { font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: 1.7rem; margin: 2.2rem 0 .6rem; letter-spacing: -.02em; }
+  h3 { margin: 1.2rem 0 .3rem; font-size: 1.05rem; }
+  p { margin: .4rem 0 .8rem; }
+  a { color: var(--green); }
+  .muted { color: var(--muted); }
+  .card, .script, .dia { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.05rem; margin: .7rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  th, td { text-align: left; padding: .45rem .3rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  label.item {
+    display: block;
+    position: relative;
+    padding: .35rem 0 .35rem 1.7rem;
+    overflow-wrap: break-word;
+  }
+  input[type=checkbox] { width: 1.05rem; height: 1.05rem; accent-color: var(--green); }
+  label.item input[type=checkbox] { position: absolute; left: 0; top: .5rem; margin: 0; }
+  pre { white-space: pre-wrap; font-family: Outfit, system-ui, sans-serif; margin: 0 0 .7rem; font-size: 1rem; }
+  button {
+    background: var(--green); color: #f4fff9; border: 0; border-radius: 999px;
+    padding: .45rem .9rem; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+  .ok { font-size: .85rem; color: var(--green); margin-left: .5rem; }
+  ol, ul { margin: .3rem 0 .8rem; padding-left: 1.2rem; }
+  li { margin: .25rem 0; }
+  .tag { display: inline-block; background: #efe6d4; border-radius: 999px; padding: .1rem .5rem; font-size: .8rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="muted">Manual interno. Não manda este link para cliente.</p>
+  <h1>O primeiro Pix sai de uma página, não de um app.</h1>
+  <p>Isac, você já faz página estática. O mercado que paga esta semana é o dono de salão, barbearia, consultório e oficina que só tem Instagram. A oferta, o exemplo e os textos abaixo estão prontos. O que falta é número no arquivo e mensagem mandada.</p>
+  <p><a href="../oferta/index.html">Abrir a página de venda</a> · <a href="../oferta/exemplo/index.html">Abrir o exemplo</a></p>
+
+  <h2>O que a varredura mostrou</h2>
+  <div class="card">
+    <p>Preço público de página única no Brasil, em tabelas de 2026, gira em torno de <strong>R$ 970 a R$ 1.500</strong>. Site simples de freelancer aparece entre <strong>R$ 800 e R$ 3.500</strong>. Institucional de 4 ou 5 páginas, <strong>R$ 1.500 a R$ 4.000</strong>. Tem gente vendendo página de MEI por <strong>R$ 497</strong>. Agência de institucional passa de <strong>R$ 2.500</strong>.</p>
+    <p>Seu preço de entrada: <strong>R$ 590</strong>. Piso, só se for o primeiro case e a pessoa topar depoimento com o nome dela: <strong>R$ 450</strong>. Abaixo disso você trabalha de graça e ainda atrasa o próximo. Depois de 3 pagamentos com print, sobe para <strong>R$ 890</strong>.</p>
+    <p class="muted">Fontes das faixas: Freelans, Huios Web, QueroSite e uma oferta pública de página para MEI. Confira de novo se for usar o número numa conversa daqui a alguns meses.</p>
+  </div>
+
+  <h3>O que eu descartei de propósito</h3>
+  <ul>
+    <li>Upwork a US$ 5 (WordPress) e US$ 25 (“full-stack de IA”). É teste disfarçado de emprego. Muita gente, pouco dinheiro, e ainda pede inglês.</li>
+    <li>Landing page antiga na Workana com 46 a 65 propostas e pedido de portfólio premium. Você chega tarde.</li>
+    <li>GetNinjas no dia 1. Você paga o contato antes de ter caixa.</li>
+    <li>App de segurança e sistema sob medida como fonte do primeiro dinheiro. O ciclo é longo e o cliente some. Isso continua em paralelo, sem ser o que paga o mês.</li>
+  </ul>
+
+  <h2>A oferta, em uma frase</h2>
+  <p>Página do negócio no ar em 3 dias úteis, com serviços, fotos, endereço e botão de WhatsApp, por R$ 590 no Pix, metade agora e metade quando o link estiver pronto.</p>
+  <table>
+    <tr><th>Entra</th><th>Fica de fora</th></tr>
+    <tr><td>1 página, celular e computador</td><td>Loja, app, cardápio com pedido</td></tr>
+    <tr><td>Até 6 serviços e 8 fotos</td><td>Logo do zero</td></tr>
+    <tr><td>WhatsApp, mapa, horário</td><td>Anúncio e rede social</td></tr>
+    <tr><td>2 ajustes</td><td>Mudança toda semana</td></tr>
+    <tr><td>Publicação num endereço grátis</td><td>Domínio (cliente paga no Registro.br, se quiser)</td></tr>
+  </table>
+  <p>Troca avulsa depois da entrega: <strong>R$ 40</strong>. Se quiser um cuidado mensal (foto e preço): <strong>R$ 70</strong>, sem fidelidade. Só oferece isso depois que a página está no ar.</p>
+
+  <h2>Os 7 dias</h2>
+  <p class="muted">As caixinhas ficam salvas neste navegador.</p>
+
+  <div class="dia">
+    <h3>Dia 1 — deixar vendável e falar com quem já te conhece</h3>
+    <label class="item"><input type="checkbox"> Colocar seu WhatsApp em <code>oferta/index.html</code>, na linha <code>SEU_WHATSAPP</code>. Formato: 5511912345678.</label>
+    <label class="item"><input type="checkbox"> Abrir a oferta no celular e ler como se você fosse o dono do salão.</label>
+    <label class="item"><input type="checkbox"> Publicar a pasta <code>oferta</code> no <a href="https://app.netlify.com/drop">Netlify Drop</a>. Conta grátis, sem cartão. Anotar o link.</label>
+    <label class="item"><input type="checkbox"> Escrever 15 nomes: gente que tem negócio ou conhece quem tem. Família entra.</label>
+    <label class="item"><input type="checkbox"> Mandar as 15 mensagens, uma a uma, com o nome da pessoa. Usar o texto “rede quente”.</label>
+    <label class="item"><input type="checkbox"> Postar o texto de status no WhatsApp e no Instagram, com um print do exemplo.</label>
+  </div>
+  <div class="dia">
+    <h3>Dia 2 — caçar no Google Maps e mandar prévia</h3>
+    <label class="item"><input type="checkbox"> Buscar na sua cidade: barbearia, salão, estética, psicólogo, oficina, personal.</label>
+    <label class="item"><input type="checkbox"> Anotar 10 que não têm site, ou têm site quebrado. O Instagram costuma estar no perfil do Maps.</label>
+    <label class="item"><input type="checkbox"> Escolher 2. Duplicar a pasta <code>oferta/exemplo</code>. Editar o bloco <code>NEGOCIO</code> com o que já é público.</label>
+    <label class="item"><input type="checkbox"> Colocar <code>exemplo: false</code> só se apagar os depoimentos fictícios. Prévia não leva depoimento inventado.</label>
+    <label class="item"><input type="checkbox"> Publicar cada pasta e mandar print da primeira tela mais o link, no WhatsApp ou no direct.</label>
+  </div>
+  <div class="dia">
+    <h3>Dia 3 — insistir e olhar plataforma só no anúncio novo</h3>
+    <label class="item"><input type="checkbox"> Responder quem falou. Quem não falou, mandar o follow-up curto.</label>
+    <label class="item"><input type="checkbox"> Fazer mais 2 prévias.</label>
+    <label class="item"><input type="checkbox"> <a href="https://www.99freelas.com.br/projects">99Freelas</a> e <a href="https://www.workana.com/jobs?language=pt">Workana</a>: no máximo 5 propostas, só em projeto publicado hoje, de página ou site simples, com pouca gente. Proposta do kit, primeiro parágrafo reescrito com o pedido deles.</label>
+  </div>
+  <div class="dia">
+    <h3>Dia 4 — um anúncio e uma apresentação</h3>
+    <label class="item"><input type="checkbox"> Subir o anúncio na OLX, categoria de serviços, com o texto do kit.</label>
+    <label class="item"><input type="checkbox"> Entrar em dois grupos da cidade (empreendedores ou bairro) e se apresentar uma vez. Não repetir amanhã.</label>
+  </div>
+  <div class="dia">
+    <h3>Dia 5 — só trabalha com sinal</h3>
+    <label class="item"><input type="checkbox"> Quem pediu “manda orçamento” recebe o link da oferta e o exemplo, não um PDF.</label>
+    <label class="item"><input type="checkbox"> Quem disse sim recebe o texto de escopo. Você espera o “concordo” e o Pix de R$ 295.</label>
+    <label class="item"><input type="checkbox"> Sem Pix, sem arquivo. A prévia que você manda é o link. Os arquivos ficam com você até a segunda metade.</label>
+  </div>
+  <div class="dia">
+    <h3>Dia 6 — mais cinco</h3>
+    <label class="item"><input type="checkbox"> Mais 5 mensagens frias, cada uma com uma coisa que você viu no perfil (serviço, bairro, foto).</label>
+    <label class="item"><input type="checkbox"> Pedir para 3 conhecidos encaminharem seu status.</label>
+  </div>
+  <div class="dia">
+    <h3>Dia 7 — contar</h3>
+    <label class="item"><input type="checkbox"> Anotar: mensagens, respostas, prévias, Pix.</label>
+    <label class="item"><input type="checkbox"> Zero resposta: a primeira linha está genérica. Reescrever com o nome do negócio e um detalhe real.</label>
+    <label class="item"><input type="checkbox"> Teve conversa e não fechou: oferecer as duas parcelas. Não descer de R$ 450.</label>
+  </div>
+
+  <h2>Textos para copiar</h2>
+
+  <div class="script">
+    <h3>Rede quente</h3>
+    <pre id="t1">Oi, [nome]. Aqui é o Isac.
+
+Estou fazendo páginas simples para negócio local: a pessoa acha no Google, vê o serviço e chama no WhatsApp. Fica pronta em 3 dias, R$ 590, uma vez só.
+
+Você conhece alguém com salão, barbearia, oficina ou consultório que ainda não tem site? Se for o seu, eu monto uma prévia com o que já está no Instagram, sem compromisso.
+
+O exemplo é este: [link da oferta]</pre>
+    <button type="button" data-copy="t1">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <div class="script">
+    <h3>Depois da prévia (mensagem fria)</h3>
+    <pre id="t2">Oi, [nome do negócio]. Sou o Isac, faço página para negócio local.
+
+Vi que o [nome] não tem site no Google, só o Instagram. Montei uma prévia com as fotos e os serviços que já estão públicos: [link].
+
+Se fizer sentido, eu ajusto, publico e deixo o botão no WhatsApp de vocês. R$ 590, uma vez só, 3 dias úteis. Se não for a hora, pode ignorar.</pre>
+    <button type="button" data-copy="t2">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <div class="script">
+    <h3>Status e legenda</h3>
+    <pre id="t3">Página do seu negócio no ar em 3 dias.
+
+Serviços, fotos, endereço e botão de WhatsApp. R$ 590, sem mensalidade.
+
+Serve para salão, barbearia, consultório, oficina, personal. Manda o nome do negócio que eu te digo se faz sentido.</pre>
+    <button type="button" data-copy="t3">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <div class="script">
+    <h3>Follow-up, dois dias depois</h3>
+    <pre id="t4">Oi, [nome]. Passando para saber se a prévia chegou. Se quiser trocar foto ou texto, me diz o que está estranho.</pre>
+    <button type="button" data-copy="t4">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <div class="script">
+    <h3>Escopo, quando a pessoa diz sim</h3>
+    <pre id="t5">Fechado. Para eu começar, preciso do Pix de R$ 295 (metade de R$ 590).
+
+Entra:
+- 1 página no celular e no computador
+- até 6 serviços
+- até 8 fotos que você mandar
+- botão no seu WhatsApp
+- endereço, horário e link do mapa
+- título com o nome do negócio e a cidade
+- 2 rodadas de ajuste
+- publicação num endereço grátis
+
+Não entra:
+- logo do zero
+- loja virtual ou aplicativo
+- anúncio
+- alteração toda semana
+
+Prazo: 3 dias úteis depois das fotos, da lista de serviços e do Pix.
+
+Me responde “concordo” que eu sigo. A segunda metade (R$ 295) é quando eu te mandar o link, antes de te entregar os arquivos.</pre>
+    <button type="button" data-copy="t5">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <div class="script">
+    <h3>“Tá caro” / “meu sobrinho faz”</h3>
+    <pre id="t6">O valor é fechado porque a página sai no ar, no celular, com WhatsApp e endereço, sem mensalidade. Dá para dividir: R$ 295 agora e R$ 295 quando o link estiver pronto.
+
+Se alguém da família fizer e também cuidar das trocas, ótimo. A diferença é o prazo desta semana e você não mexer em código. Se a pessoa topar o prazo, vai com ela.</pre>
+    <button type="button" data-copy="t6">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <div class="script">
+    <h3>Proposta para 99Freelas ou Workana</h3>
+    <pre id="t7">Vi que você precisa de [repetir o pedido em uma linha, com as palavras do anúncio].
+
+Eu entrego a página no celular, com os serviços, as fotos e o botão de WhatsApp, pronta para publicar. Um exemplo do tipo de página está aqui: [link do exemplo].
+
+Prazo de 3 dias úteis depois do material. Entram 2 ajustes. Ficam de fora loja, anúncio e logo.
+
+Valor: R$ 590 no Pix, metade para começar.
+
+Uma pergunta: a página é para campanha (a pessoa chega e pede contato) ou para apresentar a empresa inteira?</pre>
+    <button type="button" data-copy="t7">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <div class="script">
+    <h3>Anúncio de OLX</h3>
+    <pre id="t8">Título: Página do seu negócio no ar em 3 dias — R$ 590
+
+Faço a página de salão, barbearia, consultório, oficina e outros serviços locais. Entra no celular, tem seus serviços, suas fotos, o endereço e um botão de WhatsApp.
+
+Sem mensalidade. Pagamento único de R$ 590. Metade para começar, metade na entrega.
+
+Você me manda um áudio com o que faz e as fotos. Em 3 dias úteis eu te mostro no celular.
+
+Chama aqui no chat da OLX ou no WhatsApp.</pre>
+    <button type="button" data-copy="t8">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <div class="script">
+    <h3>Pedido de depoimento, depois da entrega</h3>
+    <pre id="t9">Fico feliz que a página está no ar. Se puder me mandar uma frase curta, com seu nome e o nome do negócio, eu uso como depoimento. E se conhecer outro comércio na mesma situação, eu faço a prévia. Se a indicação fechar, te devolvo R$ 50 no Pix.</pre>
+    <button type="button" data-copy="t9">Copiar</button><span class="ok" hidden>Copiado</span>
+  </div>
+
+  <h2>Como montar a prévia em meia hora</h2>
+  <ol>
+    <li>Copia a pasta <code>oferta/exemplo</code> e renomeia com o negócio. Exemplo: <code>barbearia-norte</code>.</li>
+    <li>Abre o <code>index.html</code> e mexe só no bloco <code>NEGOCIO</code>.</li>
+    <li>Nome, cidade, tipo, endereço, horário, WhatsApp do cliente, uma frase de slogan e até 6 serviços. Preço você tira do Instagram ou pergunta. Se não achar, deixa sem preço e tira o terceiro item de cada serviço.</li>
+    <li>Fotos: cola os links das fotos públicas ou, melhor, baixa as que a pessoa te mandar e troca os endereços. Enquanto for prévia fria, usa o que já está público e diz isso na mensagem.</li>
+    <li><code>depoimentos: []</code> na prévia. Lista vazia esconde a seção. Nunca publique avaliação inventada no negócio real.</li>
+    <li><code>exemplo: false</code> quando os dados forem do cliente. Aí some a tarja de demonstração e, se tiver WhatsApp completo, a página marca os dados para o Google.</li>
+    <li>Abre no celular. Tira print da primeira tela. Publica a pasta. Manda print e link.</li>
+  </ol>
+
+  <h2>Como publicar</h2>
+  <ol>
+    <li>Entra em <a href="https://app.netlify.com/drop">app.netlify.com/drop</a> com uma conta grátis.</li>
+    <li>Arrasta só a pasta daquela página, não o repositório inteiro. O vídeo do seu site pessoal é pesado e não tem nada a ver com o cliente.</li>
+    <li>Copia o link <code>.netlify.app</code>.</li>
+    <li>Para atualizar, arrasta a pasta de novo no mesmo projeto.</li>
+    <li>Domínio <code>.com.br</code> fica para o segundo cliente, se ele pedir. Ele compra no <a href="https://registro.br">Registro.br</a> e você aponta os endereços que o Netlify mostrar. O primeiro cliente pode estrear no link gratuito.</li>
+  </ol>
+  <p>No perfil da empresa no Google, o cliente cola esse link. No celular dele: buscar “perfil da empresa no Google”, criar ou reivindicar, colocar categoria, horário, fotos e o endereço da página. Isso ajuda mais do que prometer “primeira página”.</p>
+
+  <h2>Regras de dinheiro</h2>
+  <ul>
+    <li>Sem a primeira metade, você não trata como trabalho começado. Conversa e prévia rápida, sim. Arquivo e prazo, não.</li>
+    <li>A segunda metade sai antes de você entregar a pasta e antes de passar o projeto da Netlify para o e-mail dele.</li>
+    <li>O “concordo” no WhatsApp é o combinado. Não começa no “depois a gente vê”.</li>
+    <li>Duas rodadas de ajuste. A terceira é troca avulsa, R$ 40, dita antes de fazer.</li>
+    <li>Nota fiscal: para receber de empresa com frequência, o caminho é MEI na atividade de desenvolvimento de programas. O boleto mensal você confere no gov.br. Pix de pessoa física nos primeiros trabalhos funciona como combinado entre vocês, e não substitui estar regularizado.</li>
+  </ul>
+
+  <h2>Onde está o cliente, em ordem</h2>
+  <table>
+    <tr><th>Canal</th><th>Quando</th></tr>
+    <tr><td>Gente que já te conhece</td><td>Hoje. Maior chance de resposta.</td></tr>
+    <tr><td>Google Maps + Instagram do comércio sem site</td><td>Amanhã, com prévia na mão.</td></tr>
+    <tr><td>Status do WhatsApp e Instagram seu</td><td>Hoje, uma vez. Repete daqui a 4 dias com outra frase, não o mesmo texto.</td></tr>
+    <tr><td>OLX serviços</td><td>Dia 4. Anúncio grátis, conversa volta para o WhatsApp.</td></tr>
+    <tr><td>99Freelas e Workana</td><td>Só anúncio do dia, poucas propostas. Não disputa post velho.</td></tr>
+    <tr><td>Grupos de Facebook da cidade</td><td>Uma apresentação. Ajuda alguém se perguntarem de site. Não faz propaganda diária.</td></tr>
+    <tr><td>GetNinjas</td><td>Depois que entrar o primeiro Pix. Você paga por contato.</td></tr>
+    <tr><td>Upwork</td><td>Quando tiver 3 páginas no ar e um inglês escrito decente. Não é o caminho desta semana.</td></tr>
+  </table>
+
+  <h2>Nichos para buscar no Maps</h2>
+  <p>Barbearia, salão, manicure, estética, psicólogo, nutricionista, personal, pilates, dentista, veterinário, oficina, eletricista, fotógrafo, buffet, pet shop, contabilidade, aula de inglês, lava-rápido. Começa pelos três que você reconheceria na rua.</p>
+
+  <p class="muted">A página de venda está em oferta/index.html. O modelo está em oferta/exemplo/index.html. Este manual é o kit/index.html.</p>
+</div>
+<script>
+  document.querySelectorAll('input[type="checkbox"]').forEach((el, i) => {
+    const key = "nx-kit-" + i;
+    el.checked = localStorage.getItem(key) === "1";
+    el.addEventListener("change", () => localStorage.setItem(key, el.checked ? "1" : "0"));
+  });
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const texto = document.getElementById(btn.getAttribute("data-copy")).innerText;
+      try {
+        await navigator.clipboard.writeText(texto);
+      } catch (e) {
+        const area = document.createElement("textarea");
+        area.value = texto;
+        document.body.append(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
+      const ok = btn.nextElementSibling;
+      ok.hidden = false;
+      setTimeout(() => { ok.hidden = true; }, 1600);
+    });
+  });
+</script>
+</body>
+</html>

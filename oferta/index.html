@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página no ar em 3 dias — NX Web Designer</title>
+<meta name="description" content="Página do seu negócio, pronta em 3 dias úteis, com WhatsApp, serviços e endereço. Pagamento único de R$ 590, sem mensalidade.">
+<meta property="og:title" content="Página no ar em 3 dias — NX">
+<meta property="og:description" content="Uma página com seus serviços, suas fotos e um botão de WhatsApp. R$ 590, sem mensalidade.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1c1915">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%231c1915' width='32' height='32'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' fill='%23f3ecdf' font-family='serif'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1915;
+    --muted: #5e564c;
+    --line: #e3d9cc;
+    --paper: #f4efe7;
+    --card: #fffdf9;
+    --green: #0d5c45;
+    --green-dark: #094536;
+    --gold: #8a6a32;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Outfit, system-ui, sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; }
+  .wrap { width: min(1080px, calc(100% - 2rem)); margin: 0 auto; }
+  [hidden] { display: none !important; }
+  .aviso {
+    background: #3d2a12;
+    color: #f6e7cf;
+    font-size: .92rem;
+    padding: .75rem 1rem;
+    text-align: center;
+  }
+  .aviso code { font-family: ui-monospace, monospace; }
+  header.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 0;
+    gap: 1rem;
+  }
+  .brand {
+    font-size: .78rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .brand span { color: var(--gold); }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 1rem;
+    font-size: .95rem;
+  }
+  nav a:hover { color: var(--ink); }
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 2.5rem;
+    align-items: start;
+    padding: 1rem 0 3.5rem;
+  }
+  .kicker {
+    margin: 0 0 .8rem;
+    color: var(--gold);
+    font-size: .82rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    line-height: .98;
+    letter-spacing: -.03em;
+    margin: 0 0 1rem;
+  }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 38rem; margin: 0 0 1.4rem; }
+  .row { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: .75rem 1.15rem;
+    background: var(--green);
+    color: #f4fff9;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    border: 0;
+  }
+  .btn:hover { background: var(--green-dark); }
+  .btn:focus-visible, a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .btn.ghost:hover { background: #fff; }
+  .fine { color: var(--muted); font-size: .92rem; }
+  .receipt {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.3rem 1.3rem 1.15rem;
+    box-shadow: 0 20px 50px rgba(60, 40, 10, .06);
+  }
+  .receipt h2 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin: 0 0 .2rem;
+  }
+  .receipt .sub { color: var(--muted); margin: 0 0 1rem; font-size: .95rem; }
+  .lines { list-style: none; margin: 0; padding: 0; }
+  .lines li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .55rem 0;
+    border-top: 1px dashed var(--line);
+    font-size: .98rem;
+  }
+  .lines b { font-weight: 500; }
+  .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: .4rem;
+    padding-top: .8rem;
+    border-top: 2px solid var(--ink);
+  }
+  .total strong {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 560;
+    letter-spacing: -.03em;
+  }
+  .receipt .btn { width: 100%; margin-top: 1rem; }
+  section { padding: 1rem 0 3rem; }
+  h2.sec {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    letter-spacing: -.02em;
+    margin: 0 0 1rem;
+  }
+  .steps, .fit {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  article.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.1rem 1.15rem 1.2rem;
+  }
+  article.card strong { display: block; margin-bottom: .35rem; }
+  article.card p { margin: 0; color: var(--muted); }
+  .num {
+    font-family: Fraunces, Georgia, serif;
+    color: var(--gold);
+    font-size: 1.3rem;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+  .chips li {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: .4rem .75rem;
+    font-size: .95rem;
+  }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .no { background: #1c1915; color: #f6f1e8; border-radius: 16px; padding: 1.3rem; }
+  .no h2, .yes h2 { margin-top: 0; }
+  .no li, .yes li { margin: .4rem 0; }
+  .yes { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.3rem; }
+  details {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: .85rem 1rem;
+    margin-bottom: .6rem;
+  }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin: .6rem 0 0; color: var(--muted); }
+  .final {
+    background: var(--green);
+    color: #f3fff8;
+    border-radius: 20px;
+    padding: 1.6rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+  }
+  .final h2 { font-family: Fraunces, Georgia, serif; font-weight: 500; margin: 0 0 .3rem; font-size: 2rem; }
+  .final p { margin: 0; max-width: 36rem; }
+  .final .btn { background: #f4efe7; color: var(--ink); }
+  footer {
+    padding: 1.5rem 0 5.5rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: .92rem;
+  }
+  footer a { color: var(--ink); }
+  .dock {
+    display: none;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: rgba(255, 253, 249, .94);
+    border-top: 1px solid var(--line);
+    padding: .7rem 1rem calc(.7rem + env(safe-area-inset-bottom));
+    justify-content: space-between;
+    align-items: center;
+    gap: .7rem;
+  }
+  .dock b { font-family: Fraunces, Georgia, serif; font-size: 1.35rem; font-weight: 560; }
+  @media (max-width: 800px) {
+    .hero, .steps, .fit, .split { grid-template-columns: 1fr; }
+    nav .quiet { display: none; }
+    .final { flex-direction: column; align-items: flex-start; }
+    .dock { display: flex; }
+    footer { padding-bottom: 6.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="aviso" id="falta-numero">Antes de mandar este link para um cliente, abra <code>oferta/index.html</code> e preencha <code>SEU_WHATSAPP</code> com DDI e DDD. Enquanto isso, o botão cai no Instagram.</div>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./">NX <span>Web Designer</span></a>
+    <nav>
+      <a class="quiet" href="#como">Como funciona</a>
+      <a class="quiet" href="#preco">Preço</a>
+      <a href="exemplo/index.html">Ver exemplo</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="kicker">Para quem vive de cliente</p>
+      <h1>Uma página. Seu WhatsApp. Três dias.</h1>
+      <p class="lead">Eu monto a página do seu negócio com as fotos e os serviços que você já tem. A pessoa entende o que você faz e chama no WhatsApp. Sem mensalidade, sem construtor, sem você mexer em código.</p>
+      <div class="row">
+        <a class="btn" data-wa href="https://instagram.com/isacbuzelli_">Chamar no Instagram</a>
+        <a class="btn ghost" href="exemplo/index.html">Ver uma página pronta</a>
+      </div>
+      <p class="fine">Isac · NX Web Designer · atendo em qualquer cidade do Brasil</p>
+    </div>
+    <aside class="receipt" id="preco">
+      <h2>Página no ar</h2>
+      <p class="sub">Pagamento único. A página continua sua.</p>
+      <ul class="lines">
+        <li><span>Página única, no celular</span><b>incluso</b></li>
+        <li><span>Até 6 serviços</span><b>incluso</b></li>
+        <li><span>Até 8 fotos suas</span><b>incluso</b></li>
+        <li><span>Botão de WhatsApp</span><b>incluso</b></li>
+        <li><span>Endereço, horário e mapa</span><b>incluso</b></li>
+        <li><span>2 rodadas de ajuste</span><b>incluso</b></li>
+        <li><span>Mensalidade</span><b>não tem</b></li>
+      </ul>
+      <div class="total"><span>Total</span><strong>R$ 590</strong></div>
+      <a class="btn" data-wa href="https://instagram.com/isacbuzelli_">Quero a minha</a>
+      <p class="fine">Metade no Pix para começar. A outra metade quando o link estiver pronto.</p>
+    </aside>
+  </section>
+
+  <section id="como">
+    <h2 class="sec">Como entra no ar</h2>
+    <div class="steps">
+      <article class="card">
+        <span class="num">01</span>
+        <strong>Você manda um áudio</strong>
+        <p>O que você faz, para quem, bairro, horário e o WhatsApp. Se tiver fotos, manda junto. Se não tiver, a gente usa as do seu Instagram.</p>
+      </article>
+      <article class="card">
+        <span class="num">02</span>
+        <strong>Eu monto e te mostro</strong>
+        <p>Em até 3 dias úteis você abre a página no celular. Pede ajuste. São duas rodadas dentro do preço.</p>
+      </article>
+      <article class="card">
+        <span class="num">03</span>
+        <strong>Publico e te entrego</strong>
+        <p>A página fica num endereço seu, com cadeado. Você paga a segunda metade e recebe o link para colocar na bio e no Google.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec">Serve para este tipo de negócio</h2>
+    <ul class="chips">
+      <li>Salão e barbearia</li>
+      <li>Estética e unha</li>
+      <li>Psicólogo e nutricionista</li>
+      <li>Personal e pilates</li>
+      <li>Oficina e elétrica</li>
+      <li>Fotógrafo</li>
+      <li>Pet shop e veterinário</li>
+      <li>Buffet e confeitaria</li>
+      <li>Aula particular</li>
+      <li>Escritório pequeno</li>
+    </ul>
+  </section>
+
+  <section class="split">
+    <div class="yes">
+      <h2 class="sec">O que você recebe</h2>
+      <ul>
+        <li>Página rápida no celular, que é onde o seu cliente está.</li>
+        <li>Texto organizado a partir do seu áudio. Você não precisa escrever.</li>
+        <li>Título e descrição com o nome do negócio e a cidade, para o Google achar pelo seu nome.</li>
+        <li>Publicação inclusa. Domínio próprio, se quiser, é à parte no Registro.br.</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h2 class="sec">O que fica de fora</h2>
+      <ul>
+        <li>Loja virtual, cardápio com pedido e aplicativo.</li>
+        <li>Anúncio no Instagram ou no Google.</li>
+        <li>Logo do zero e gestão de rede social.</li>
+        <li>Alteração toda semana. Isso é outro combinado, depois da entrega.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec">Perguntas que sempre chegam</h2>
+    <details open>
+      <summary>Preciso já ter um domínio?</summary>
+      <p>Não. Eu publico num endereço gratuito com cadeado. Se quiser seunegocio.com.br, você registra no Registro.br (fica na casa das dezenas de reais por ano, pago por você) e eu aponto.</p>
+    </details>
+    <details>
+      <summary>E se eu não gostar do resultado?</summary>
+      <p>Você vê a página antes de pagar a segunda metade. Duas rodadas de ajuste entram no preço. A primeira metade cobre o trabalho de montar a prévia até esse ponto.</p>
+    </details>
+    <details>
+      <summary>Vai aparecer no Google?</summary>
+      <p>Pelo nome do negócio, sim, esse é o básico que eu deixo certo. Palavra genérica tipo “manicure perto de mim” depende também do perfil da empresa no Google, das avaliações e do tempo. Eu te digo como colocar o link lá. Não prometo primeira posição.</p>
+    </details>
+    <details>
+      <summary>Tem mensalidade?</summary>
+      <p>Não. R$ 590 uma vez. Se mais tarde quiser trocar foto ou preço, a gente combina à parte. A página não fica refém de um construtor.</p>
+    </details>
+  </section>
+
+  <section class="final">
+    <div>
+      <h2>Manda o nome do negócio.</h2>
+      <p>Se você já tem Instagram, eu olho o que está público e te digo na hora se a página faz sentido.</p>
+    </div>
+    <a class="btn" data-wa href="https://instagram.com/isacbuzelli_">Chamar agora</a>
+  </section>
+
+  <footer>
+    <span>Isac · NX Web Designer</span>
+    <span>
+      <a href="https://instagram.com/isacbuzelli_">Instagram</a>
+      ·
+      <a href="https://github.com/ahr7onix">GitHub</a>
+      ·
+      <a href="exemplo/index.html">Exemplo</a>
+    </span>
+  </footer>
+</div>
+<div class="dock">
+  <div><b>R$ 590</b><div class="fine">3 dias úteis</div></div>
+  <a class="btn" data-wa href="https://instagram.com/isacbuzelli_">Chamar</a>
+</div>
+<script>
+  const SEU_WHATSAPP = "";
+  const mensagem = "Oi Isac, vi a página da NX e quero uma para o meu negócio.";
+  const numero = String(SEU_WHATSAPP).replace(/\D/g, "");
+  const pronto = numero.length >= 12;
+  if (pronto) {
+    const url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
+    document.querySelectorAll("[data-wa]").forEach((el) => {
+      el.href = url;
+      const texto = el.textContent.trim();
+      if (texto.includes("Instagram") || texto === "Chamar") {
+        el.textContent = el.closest(".dock") ? "WhatsApp" : "Chamar no WhatsApp";
+      }
+    });
+    document.getElementById("falta-numero").hidden = true;
+  }
+</script>
+</body>
+</html>
