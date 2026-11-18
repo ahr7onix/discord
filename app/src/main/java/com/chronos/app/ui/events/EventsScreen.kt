@@ -3,6 +3,8 @@ package com.chronos.app.ui.events
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,20 +14,24 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.chronos.app.ui.components.CategoryDot
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,6 +45,7 @@ import com.chronos.app.domain.recurrence.RecurrenceDescriber
 import com.chronos.app.ui.components.CategoryDot
 import com.chronos.app.ui.components.EmptyState
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun EventsScreen(
     viewModel: EventsViewModel,
@@ -46,6 +53,7 @@ fun EventsScreen(
     modifier: Modifier = Modifier,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var pendingDelete by remember { mutableStateOf<Event?>(null) }
 
     LazyColumn(
         modifier = modifier.fillMaxSize().padding(horizontal = 16.dp),
@@ -62,6 +70,28 @@ fun EventsScreen(
             )
         }
 
+        if (state.categories.isNotEmpty()) {
+            item {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(
+                        selected = state.categoryFilter == null,
+                        onClick = { viewModel.setCategoryFilter(null) },
+                        label = { Text("Todas") },
+                    )
+                    state.categories.values.forEach { cat ->
+                        FilterChip(
+                            selected = state.categoryFilter == cat.id,
+                            onClick = {
+                                viewModel.setCategoryFilter(if (state.categoryFilter == cat.id) null else cat.id)
+                            },
+                            label = { Text(cat.name) },
+                            leadingIcon = { CategoryDot(Color(cat.colorArgb), size = 10) },
+                        )
+                    }
+                }
+            }
+        }
+
         if (state.events.isEmpty()) {
             item { EmptyState("Nenhum agendamento", "Crie o primeiro tocando em +.") }
         } else {
@@ -74,10 +104,22 @@ fun EventsScreen(
                     onPause = { viewModel.pause(event) },
                     onResume = { viewModel.resume(event) },
                     onCancel = { viewModel.cancel(event) },
-                    onDelete = { viewModel.delete(event) },
+                    onDelete = { pendingDelete = event },
                 )
             }
         }
+    }
+
+    pendingDelete?.let { event ->
+        AlertDialog(
+            onDismissRequest = { pendingDelete = null },
+            title = { Text("Excluir agendamento?") },
+            text = { Text("\"${event.title}\" e todo o seu histórico serão removidos. Não pode ser desfeito.") },
+            confirmButton = {
+                TextButton(onClick = { viewModel.delete(event); pendingDelete = null }) { Text("Excluir") }
+            },
+            dismissButton = { TextButton(onClick = { pendingDelete = null }) { Text("Cancelar") } },
+        )
     }
 }
 
