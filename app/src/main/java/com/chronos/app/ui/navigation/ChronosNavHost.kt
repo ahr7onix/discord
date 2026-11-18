@@ -12,6 +12,8 @@ import com.chronos.app.ui.calendar.CalendarScreen
 import com.chronos.app.ui.calendar.CalendarViewModel
 import com.chronos.app.ui.events.EditEventScreen
 import com.chronos.app.ui.events.EditEventViewModel
+import com.chronos.app.ui.events.EventDetailScreen
+import com.chronos.app.ui.events.EventDetailViewModel
 import com.chronos.app.ui.events.EventsScreen
 import com.chronos.app.ui.events.EventsViewModel
 import com.chronos.app.ui.home.HomeScreen
@@ -32,19 +34,20 @@ fun ChronosNavHost(
         navController.navigate(Dest.EditEvent.build(id, day))
     }
     val openDay: (Long) -> Unit = { day -> navController.navigate(Dest.EditEvent.build(null, day)) }
+    val openDetail: (Long) -> Unit = { id -> navController.navigate(Dest.EventDetail.build(id)) }
 
     NavHost(navController = navController, startDestination = startDestination, modifier = modifier) {
         composable(Dest.Home.route) {
             val vm: HomeViewModel = viewModel(factory = factory)
-            HomeScreen(vm, onOpenEvent = { openEdit(it, null) }, onNewEvent = { openEdit(null, null) })
+            HomeScreen(vm, onOpenEvent = openDetail, onNewEvent = { openEdit(null, null) })
         }
         composable(Dest.Calendar.route) {
             val vm: CalendarViewModel = viewModel(factory = factory)
-            CalendarScreen(vm, onOpenEvent = { openEdit(it, null) }, onNewOnDay = { openDay(it) })
+            CalendarScreen(vm, onOpenEvent = openDetail, onNewOnDay = { openDay(it) })
         }
         composable(Dest.Events.route) {
             val vm: EventsViewModel = viewModel(factory = factory)
-            EventsScreen(vm, onOpenEvent = { openEdit(it, null) })
+            EventsScreen(vm, onOpenEvent = openDetail)
         }
         composable(Dest.Statistics.route) {
             val vm: StatisticsViewModel = viewModel(factory = factory)
@@ -53,6 +56,18 @@ fun ChronosNavHost(
         composable(Dest.Settings.route) {
             val vm: SettingsViewModel = viewModel(factory = factory)
             SettingsScreen(vm)
+        }
+        composable(
+            route = Dest.EventDetail.route,
+            arguments = listOf(navArgument("eventId") { type = NavType.LongType }),
+        ) { entry ->
+            val eventId = entry.arguments?.getLong("eventId") ?: -1L
+            val vm: EventDetailViewModel = viewModel(factory = factory.forEventDetail(eventId))
+            EventDetailScreen(
+                vm,
+                onEdit = { openEdit(it, null) },
+                onBack = { navController.popBackStack() },
+            )
         }
         composable(
             route = Dest.EditEvent.route,

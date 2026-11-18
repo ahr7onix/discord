@@ -23,6 +23,10 @@ sealed class Dest(val route: String) {
             return "edit?eventId=$id&day=$day"
         }
     }
+
+    data object EventDetail : Dest("detail/{eventId}") {
+        fun build(eventId: Long): String = "detail/$eventId"
+    }
 }
 
 data class BottomItem(val dest: Dest, val label: String, val icon: ImageVector)

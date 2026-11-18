@@ -42,6 +42,10 @@ class ChronosRepository(
 
     suspend fun getEvent(id: Long): Event? = eventDao.getWithRule(id)?.let(Mappers::toDomain)
 
+    /** Expanded occurrences in [from, to] for a single event (detail view). */
+    fun occurrencesForEvent(eventId: Long, from: LocalDate, to: LocalDate): Flow<List<EventOccurrence>> =
+        occurrences(from, to).map { all -> all.filter { it.event.id == eventId } }
+
     /**
      * Expanded occurrences in [from, to], overlaid with exceptions (skip/move)
      * and history status, sorted by start time. This is the calendar/agenda

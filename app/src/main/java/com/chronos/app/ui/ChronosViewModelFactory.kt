@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.chronos.app.AppContainer
 import com.chronos.app.ui.calendar.CalendarViewModel
 import com.chronos.app.ui.events.EditEventViewModel
+import com.chronos.app.ui.events.EventDetailViewModel
 import com.chronos.app.ui.events.EventsViewModel
 import com.chronos.app.ui.home.HomeViewModel
 import com.chronos.app.ui.settings.SettingsViewModel
@@ -39,5 +40,12 @@ class ChronosViewModelFactory(
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T =
                 EditEventViewModel(container.repository, eventId, initialEpochDay) as T
+        }
+
+    fun forEventDetail(eventId: Long): ViewModelProvider.Factory =
+        object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T =
+                EventDetailViewModel(container.repository, eventId) as T
         }
 }
