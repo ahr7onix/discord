@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Chronos</string>
+    <string name="channel_reminders">Lembretes</string>
+    <string name="channel_reminders_desc">Alertas de agendamentos e lembretes.</string>
+    <string name="action_complete">Concluir</string>
+    <string name="action_snooze">Adiar 10 min</string>
+</resources>
