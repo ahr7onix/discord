@@ -115,7 +115,11 @@ destrutivas pedem confirmação na interface.
 
 ## Status
 
-Código-fonte completo, compilável no Android Studio. O motor de recorrência e o modelo de
-domínio têm testes automatizados verdes (verificados em JVM). O APK não foi compilado neste
-ambiente por ausência do Android SDK; `./gradlew assembleDebug` o gera onde o SDK estiver
-disponível.
+Projeto completo e **compilável**. Verificado com AGP 8.7.3 + SDK 35 + Gradle 8.11.1:
+
+- `./gradlew assembleDebug` gera `app/build/outputs/apk/debug/app-debug.apk` (~18 MB),
+  instalável (pacote `com.chronos.app`, `MainActivity` lançável, minSdk 26 / targetSdk 35).
+- `./gradlew testDebugUnitTest` passa: **31 testes, 0 falhas** (motor de recorrência,
+  modelo de domínio e descritor).
+
+Os testes instrumentados (`connectedAndroidTest`) precisam de um device/emulador.
