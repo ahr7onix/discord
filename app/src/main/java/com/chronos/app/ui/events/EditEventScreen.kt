@@ -1,7 +1,13 @@
 package com.chronos.app.ui.events
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
@@ -41,6 +47,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -147,6 +154,23 @@ fun EditEventScreen(
                         onClick = { viewModel.update { it.copy(priority = p) } },
                         shape = SegmentedButtonDefaults.itemShape(i, Priority.entries.size),
                     ) { Text(priorityLabel(p)) }
+                }
+            }
+
+            Label("Cor")
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                ColorSwatch(
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    selected = form.colorArgb == null,
+                    onClick = { viewModel.update { it.copy(colorArgb = null) } },
+                    showBorder = true,
+                )
+                EVENT_COLORS.forEach { argb ->
+                    ColorSwatch(
+                        color = Color(argb),
+                        selected = form.colorArgb == argb,
+                        onClick = { viewModel.update { it.copy(colorArgb = argb) } },
+                    )
                 }
             }
 
@@ -398,3 +422,36 @@ private fun orderedWeekdays(): List<DayOfWeek> = listOf(
     DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,
     DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY,
 )
+
+private val EVENT_COLORS = listOf(
+    0xFF8B5CF6.toInt(), // violet
+    0xFF6366F1.toInt(), // indigo
+    0xFF3B82F6.toInt(), // blue
+    0xFF10B981.toInt(), // green
+    0xFFF59E0B.toInt(), // amber
+    0xFFEF4444.toInt(), // red
+    0xFFEC4899.toInt(), // pink
+    0xFF14B8A6.toInt(), // teal
+)
+
+@Composable
+private fun ColorSwatch(
+    color: androidx.compose.ui.graphics.Color,
+    selected: Boolean,
+    onClick: () -> Unit,
+    showBorder: Boolean = false,
+) {
+    val ring = MaterialTheme.colorScheme.onSurface
+    Box(
+        modifier = Modifier
+            .size(36.dp)
+            .clip(CircleShape)
+            .background(color)
+            .then(
+                if (selected) Modifier.border(3.dp, ring, CircleShape)
+                else if (showBorder) Modifier.border(1.dp, MaterialTheme.colorScheme.outline, CircleShape)
+                else Modifier
+            )
+            .clickable(onClick = onClick),
+    )
+}
