@@ -16,6 +16,7 @@ object RecurrenceDescriber {
     fun describe(rule: RecurrenceRule): String {
         val base = when (rule.frequency) {
             Frequency.NONE -> "Sem repetição"
+            Frequency.HOURLY -> if (rule.interval == 1) "A cada hora" else "A cada ${rule.interval} horas"
             Frequency.DAILY -> daily(rule.interval)
             Frequency.WEEKLY -> weekly(rule)
             Frequency.MONTHLY -> monthly(rule)

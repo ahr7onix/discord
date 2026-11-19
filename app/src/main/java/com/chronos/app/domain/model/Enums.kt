@@ -8,6 +8,8 @@ package com.chronos.app.domain.model
 enum class Frequency {
     /** No repetition. The event is a single occurrence. */
     NONE,
+    /** Sub-daily: fires every [RecurrenceRule.interval] hours, all day. */
+    HOURLY,
     DAILY,
     WEEKLY,
     MONTHLY,

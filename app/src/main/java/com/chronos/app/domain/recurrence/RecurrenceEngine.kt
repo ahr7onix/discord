@@ -6,7 +6,10 @@ import com.chronos.app.domain.model.MissingDayPolicy
 import com.chronos.app.domain.model.MonthlyMode
 import com.chronos.app.domain.model.RecurrenceRule
 import java.time.DayOfWeek
+import java.time.Duration
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.YearMonth
 import java.time.temporal.TemporalAdjusters
 
@@ -70,10 +73,39 @@ object RecurrenceEngine {
 
     private fun rawDates(rule: RecurrenceRule): Sequence<LocalDate> = when (rule.frequency) {
         Frequency.NONE -> sequenceOf(rule.anchorDate)
+        // An hourly event is active every day; for calendar/agenda display it
+        // shows once per date. The real sub-daily firing is computed by
+        // [nextHourlyTrigger] in the scheduler.
+        Frequency.HOURLY -> generateSequence(0L) { it + 1 }.map { rule.anchorDate.plusDays(it) }
         Frequency.DAILY -> daily(rule)
         Frequency.WEEKLY -> weekly(rule)
         Frequency.MONTHLY -> monthly(rule)
         Frequency.YEARLY -> yearly(rule)
+    }
+
+    /**
+     * Next sub-daily fire at or after [after] for an HOURLY rule, counting
+     * every [RecurrenceRule.interval] hours from the anchor datetime. Returns
+     * null for a non-hourly rule or once the rule's end date has passed.
+     */
+    fun nextHourlyTrigger(
+        rule: RecurrenceRule,
+        startTime: LocalTime,
+        after: LocalDateTime,
+    ): LocalDateTime? {
+        if (rule.frequency != Frequency.HOURLY) return null
+        val anchor = rule.anchorDate.atTime(startTime)
+        val step = rule.interval.coerceAtLeast(1).toLong()
+        val next = if (!after.isAfter(anchor)) {
+            anchor
+        } else {
+            val hoursSince = Duration.between(anchor, after).toHours()
+            anchor.plusHours((hoursSince / step + 1) * step)
+        }
+        if (rule.endMode == EndMode.UNTIL_DATE && rule.until != null &&
+            next.toLocalDate().isAfter(rule.until)
+        ) return null
+        return next
     }
 
     private fun daily(rule: RecurrenceRule): Sequence<LocalDate> {

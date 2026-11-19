@@ -82,8 +82,6 @@ fun EditEventScreen(
 
     var showDatePicker by remember { mutableStateOf(false) }
     var showStartPicker by remember { mutableStateOf(false) }
-    var showEndPicker by remember { mutableStateOf(false) }
-    var showUntilPicker by remember { mutableStateOf(false) }
     var showScopeDialog by remember { mutableStateOf(false) }
 
     val attemptSave = {
@@ -174,23 +172,13 @@ fun EditEventScreen(
                 }
             }
 
-            Label("Data e horário")
+            Label(if (form.frequency == Frequency.HOURLY) "Início (a partir de)" else "Data e horário")
             OutlinedButton(onClick = { showDatePicker = true }, modifier = Modifier.fillMaxWidth()) {
                 Text(form.date.format(DateTimeFmt.shortDate) + " · " +
                     form.date.format(DateTimeFmt.weekdayLong).replaceFirstChar { it.uppercase() })
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedButton(onClick = { showStartPicker = true }, modifier = Modifier.weight(1f)) {
-                    Text("Início " + form.startTime.format(DateTimeFmt.time24))
-                }
-                if (form.hasEndTime) {
-                    OutlinedButton(onClick = { showEndPicker = true }, modifier = Modifier.weight(1f)) {
-                        Text("Fim " + form.endTime.format(DateTimeFmt.time24))
-                    }
-                }
-            }
-            SwitchRow("Definir horário final", form.hasEndTime) { on ->
-                viewModel.update { it.copy(hasEndTime = on) }
+            OutlinedButton(onClick = { showStartPicker = true }, modifier = Modifier.fillMaxWidth()) {
+                Text("Horário " + form.startTime.format(DateTimeFmt.time24))
             }
 
             Label("Repetição")
@@ -239,36 +227,16 @@ fun EditEventScreen(
                 }
             }
 
-            Label("Término")
-            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-                val modes = listOf(EndMode.NEVER, EndMode.UNTIL_DATE, EndMode.COUNT)
-                modes.forEachIndexed { i, m ->
-                    SegmentedButton(
-                        selected = form.endMode == m,
-                        onClick = { viewModel.update { it.copy(endMode = m) } },
-                        shape = SegmentedButtonDefaults.itemShape(i, modes.size),
-                        enabled = form.isRecurring || m == EndMode.NEVER,
-                    ) { Text(endLabel(m)) }
-                }
-            }
-            when (form.endMode) {
-                EndMode.UNTIL_DATE -> OutlinedButton(
-                    onClick = { showUntilPicker = true }, modifier = Modifier.fillMaxWidth()
-                ) { Text("Até " + (form.until ?: form.date).format(DateTimeFmt.shortDate)) }
-                EndMode.COUNT -> IntervalStepper(null, form.count, suffix = "ocorrências") { v ->
-                    viewModel.update { it.copy(count = v) }
-                }
-                EndMode.NEVER -> Unit
-            }
-
-            Label("Lembretes")
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                reminderOptions().forEach { lead ->
-                    FilterChip(
-                        selected = form.reminders.any { it.minutesBefore == lead.minutesBefore },
-                        onClick = { viewModel.toggleReminder(lead) },
-                        label = { Text(reminderLabel(lead)) },
-                    )
+            if (form.frequency != Frequency.HOURLY) {
+                Label("Lembretes")
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    reminderOptions().forEach { lead ->
+                        FilterChip(
+                            selected = form.reminders.any { it.minutesBefore == lead.minutesBefore },
+                            onClick = { viewModel.toggleReminder(lead) },
+                            label = { Text(reminderLabel(lead)) },
+                        )
+                    }
                 }
             }
 
@@ -287,22 +255,10 @@ fun EditEventScreen(
             showDatePicker = false
         }
     }
-    if (showUntilPicker) {
-        DatePickerModal(initial = form.until ?: form.date, onDismiss = { showUntilPicker = false }) { picked ->
-            viewModel.update { it.copy(until = picked) }
-            showUntilPicker = false
-        }
-    }
     if (showStartPicker) {
         TimePickerModal(initial = form.startTime, onDismiss = { showStartPicker = false }) { picked ->
             viewModel.update { it.copy(startTime = picked) }
             showStartPicker = false
-        }
-    }
-    if (showEndPicker) {
-        TimePickerModal(initial = form.endTime, onDismiss = { showEndPicker = false }) { picked ->
-            viewModel.update { it.copy(endTime = picked) }
-            showEndPicker = false
         }
     }
     if (showScopeDialog) {
@@ -397,13 +353,11 @@ private fun priorityLabel(p: Priority) = when (p) {
     Priority.LOW -> "Baixa"; Priority.NORMAL -> "Normal"; Priority.HIGH -> "Alta"
 }
 private fun frequencyLabel(f: Frequency) = when (f) {
-    Frequency.NONE -> "Nunca"; Frequency.DAILY -> "Diária"; Frequency.WEEKLY -> "Semanal"
-    Frequency.MONTHLY -> "Mensal"; Frequency.YEARLY -> "Anual"
-}
-private fun endLabel(e: EndMode) = when (e) {
-    EndMode.NEVER -> "Nunca"; EndMode.UNTIL_DATE -> "Até data"; EndMode.COUNT -> "Nº vezes"
+    Frequency.NONE -> "Nunca"; Frequency.HOURLY -> "Horária"; Frequency.DAILY -> "Diária"
+    Frequency.WEEKLY -> "Semanal"; Frequency.MONTHLY -> "Mensal"; Frequency.YEARLY -> "Anual"
 }
 private fun unitLabel(f: Frequency?, n: Int) = when (f) {
+    Frequency.HOURLY -> if (n == 1) "hora" else "horas"
     Frequency.DAILY -> if (n == 1) "dia" else "dias"
     Frequency.WEEKLY -> if (n == 1) "semana" else "semanas"
     Frequency.MONTHLY -> if (n == 1) "mês" else "meses"

@@ -12,6 +12,8 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 
 /**
  * Covers the mandatory recurrence cases from spec §12, with the §6–§7 edge
@@ -247,6 +249,31 @@ class RecurrenceEngineTest {
             endMode = EndMode.COUNT, count = 2,
         )
         assertNull(RecurrenceEngine.nextOccurrence(rule, LocalDate.of(2026, 2, 1)))
+    }
+
+    @Test
+    fun hourly_nextTrigger_landsOnNextStep() {
+        val rule = RecurrenceRule(Frequency.HOURLY, interval = 2, anchorDate = LocalDate.of(2026, 1, 1))
+        val next = RecurrenceEngine.nextHourlyTrigger(
+            rule, LocalTime.of(8, 0), LocalDateTime.of(2026, 1, 1, 9, 0),
+        )
+        assertEquals(LocalDateTime.of(2026, 1, 1, 10, 0), next)
+    }
+
+    @Test
+    fun hourly_beforeAnchor_returnsAnchorDateTime() {
+        val rule = RecurrenceRule(Frequency.HOURLY, interval = 1, anchorDate = LocalDate.of(2026, 1, 2))
+        val next = RecurrenceEngine.nextHourlyTrigger(
+            rule, LocalTime.of(7, 0), LocalDateTime.of(2026, 1, 1, 0, 0),
+        )
+        assertEquals(LocalDateTime.of(2026, 1, 2, 7, 0), next)
+    }
+
+    @Test
+    fun hourly_showsOncePerDayForDisplay() {
+        val rule = RecurrenceRule(Frequency.HOURLY, interval = 3, anchorDate = LocalDate.of(2026, 1, 1))
+        val dates = RecurrenceEngine.occurrencesInRange(rule, LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 3))
+        assertEquals(listOf(LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 2), LocalDate.of(2026, 1, 3)), dates)
     }
 
     @Test

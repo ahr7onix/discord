@@ -10,8 +10,11 @@ import com.chronos.app.data.dao.NotificationDao
 import com.chronos.app.data.entities.NotificationEntity
 import com.chronos.app.data.repository.Mappers
 import com.chronos.app.domain.model.Event
+import com.chronos.app.domain.model.Frequency
+import com.chronos.app.domain.recurrence.RecurrenceEngine
 import com.chronos.app.domain.scheduler.EventScheduler
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.ZoneId
 
 /**
@@ -97,6 +100,13 @@ class AlarmSchedulerImpl(
         val zone = ZoneId.systemDefault()
         val now = System.currentTimeMillis()
         val today = LocalDate.now(zone)
+
+        // Hourly events fire on a sub-daily cadence; compute the next instant
+        // directly and arm one alarm (AlarmReceiver re-arms the following one).
+        if (event.rule.frequency == Frequency.HOURLY) {
+            return computeNextHourly(event, zone, now)
+        }
+
         // Generous horizon so even multi-year intervals get armed eventually.
         val horizonEnd = today.plusYears(6)
 
@@ -121,6 +131,26 @@ class AlarmSchedulerImpl(
                 } else null
             }
             if (leads.isNotEmpty()) return leads
+        }
+        return null
+    }
+
+    /** Next hourly trigger strictly after now, skipping paused days. */
+    private fun computeNextHourly(event: Event, zone: ZoneId, now: Long): List<Armed>? {
+        var cursor = LocalDateTime.now(zone)
+        repeat(500) {
+            val next = RecurrenceEngine.nextHourlyTrigger(event.rule, event.startTime, cursor)
+                ?: return null
+            val date = next.toLocalDate()
+            val triggerMillis = next.atZone(zone).toInstant().toEpochMilli()
+            when {
+                triggerMillis <= now -> cursor = next.plusSeconds(1)
+                event.isPausedOn(date) -> cursor = date.plusDays(1).atStartOfDay()
+                else -> {
+                    val reqCode = ((event.id * 31 + triggerMillis / 3_600_000L) and 0x7FFFFFFF).toInt()
+                    return listOf(Armed(event.id, date, 0, triggerMillis, reqCode))
+                }
+            }
         }
         return null
     }
