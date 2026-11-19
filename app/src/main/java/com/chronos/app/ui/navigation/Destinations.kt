@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 /** Top-level, bottom-bar destinations plus the modal edit route. */
 sealed class Dest(val route: String) {
+    data object Splash : Dest("splash")
     data object Home : Dest("home")
     data object Calendar : Dest("calendar")
     data object Events : Dest("events")

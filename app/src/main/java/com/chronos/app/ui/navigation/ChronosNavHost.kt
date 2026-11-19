@@ -27,7 +27,7 @@ import com.chronos.app.ui.statistics.StatisticsViewModel
 fun ChronosNavHost(
     navController: NavHostController,
     factory: ChronosViewModelFactory,
-    startDestination: String = Dest.Home.route,
+    startDestination: String = Dest.Splash.route,
     modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier,
 ) {
     val openEdit: (Long?, Long?) -> Unit = { id, day ->
@@ -37,6 +37,16 @@ fun ChronosNavHost(
     val openDetail: (Long) -> Unit = { id -> navController.navigate(Dest.EventDetail.build(id)) }
 
     NavHost(navController = navController, startDestination = startDestination, modifier = modifier) {
+        composable(Dest.Splash.route) {
+            com.chronos.app.ui.splash.SplashScreen(
+                onFinished = {
+                    navController.navigate(Dest.Home.route) {
+                        popUpTo(Dest.Splash.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
         composable(Dest.Home.route) {
             val vm: HomeViewModel = viewModel(factory = factory)
             HomeScreen(vm, onOpenEvent = openDetail, onNewEvent = { openEdit(null, null) })
