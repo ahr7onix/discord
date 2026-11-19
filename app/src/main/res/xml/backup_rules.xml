@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Full-backup inclusion. The Room DB and DataStore are local user data. -->
+<full-backup-content>
+    <include domain="database" path="chronos.db" />
+    <include domain="database" path="chronos.db-wal" />
+    <include domain="database" path="chronos.db-shm" />
+    <include domain="file" path="datastore/" />
+</full-backup-content>
